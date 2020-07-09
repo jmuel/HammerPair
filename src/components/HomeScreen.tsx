@@ -18,10 +18,6 @@ export default ({ navigation }: Props) => {
         onPress={() => navigation.navigate("Pairing")}
       />
       <Button
-        title="Go to Army Creation"
-        onPress={() => navigation.navigate("ArmyCreation")}
-      />
-      <Button
         title="Go to Army Lists"
         onPress={() => navigation.navigate("Army")}
       />

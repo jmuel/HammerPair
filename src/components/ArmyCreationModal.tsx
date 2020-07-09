@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
-  Modal,
   Picker,
   Text,
   TextInput,
@@ -10,6 +9,9 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
+
+import Modal from "modal-enhanced-react-native-web";
+import type {FACTION} from "../redux/modules/ArmyLists";
 
 import { createArmy } from "../redux/modules/ArmyLists";
 
@@ -30,7 +32,7 @@ const factions = [
 
 const ArmyCreationModal = ({ onRequestClose, visible }: PROPS) => {
   const [armyName, setArmyName] = useState("Placeholder Army Name");
-  const [armyFaction, setArmyFaction] = useState("IMPERIUM");
+  const [armyFaction, setArmyFaction] = useState<FACTION>("IMPERIUM");
   const [points, setPoints] = useState(50);
   const dispatch = useDispatch();
 
@@ -54,7 +56,7 @@ const ArmyCreationModal = ({ onRequestClose, visible }: PROPS) => {
             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
             onPress={onRequestClose}
           >
-            <Text style={styles.textStyle}>Hid Modal</Text>
+            <Text style={styles.textStyle}>Hide Modal</Text>
           </TouchableHighlight>
           <Text style={styles.modalText}>Select an army name</Text>
           <TextInput value={armyName} onChangeText={setArmyName} />
@@ -62,14 +64,14 @@ const ArmyCreationModal = ({ onRequestClose, visible }: PROPS) => {
           <TextInput
             keyboardType="numeric"
             value={points.toString()}
-            onChangeText={(newPoints) =>
+            onChangeText={(newPoints: string) =>
               setPoints(parseInt(newPoints.replace(/[^0-9]/g, "")))
             }
           />
           <Button
             title="Create Army"
             onPress={() => {
-              dispatch(createArmy(armyName));
+              dispatch(createArmy(armyName, armyFaction, points));
               onRequestClose();
             }}
           />

@@ -13,18 +13,22 @@ const armyListsSelector = createSelector(
 );
 
 export default () => {
-  const armyLists: Array<{ id: string; points: number }> = useSelector(armyListsSelector);
+  const armyLists: Array<{ id: string; points: number }> = useSelector(
+    armyListsSelector
+  );
   const [isArmyCreationModalOpen, setIsArmyCreationModalOpen] = useState(false);
   return (
     <View>
       <Text>This is an army screen</Text>
-      {armyLists
-        .map((armyList) => <Text key={armyList.id}>{JSON.stringify(armyList)}</Text>)
-      }
+      {armyLists.map((armyList) => (
+        <Text key={armyList.id}>{JSON.stringify(armyList)}</Text>
+      ))}
       <TouchableHighlight
         style={styles.openButton}
         onPress={() => setIsArmyCreationModalOpen(true)}
-      ></TouchableHighlight>
+      >
+        <Text>Create an army</Text>
+      </TouchableHighlight>
       <ArmyCreationModal
         visible={isArmyCreationModalOpen}
         onRequestClose={() => {
